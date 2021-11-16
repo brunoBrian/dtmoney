@@ -4,7 +4,10 @@ import { Dashboard } from "./components/Dashboard";
 import { Header } from "./components/Header";
 import { NewTransactionModal } from "./components/NewTransactionModal";
 
+import {TransactionProvider} from './hooks/useTransactions'
+
 export function App() {
+
 
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -17,7 +20,7 @@ export function App() {
   }
 
   return (
-    <>
+    <TransactionProvider>
       <Header openNewTransaction={openModal} />
       <Dashboard />
 
@@ -25,6 +28,6 @@ export function App() {
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
       />
-    </>
+    </TransactionProvider>
   );
 }

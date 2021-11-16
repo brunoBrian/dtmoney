@@ -4,7 +4,6 @@ import { createServer, Model } from 'miragejs';
 
 import { App } from './App';
 import { GlobalStyle } from './styles/global';
-import { timeStamp } from 'console';
 
 createServer({
   models: {

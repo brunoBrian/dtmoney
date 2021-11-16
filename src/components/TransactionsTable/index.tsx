@@ -1,27 +1,9 @@
-import { useEffect, useState } from 'react'
-import { api } from '../../services/api'
+import { useTransactions } from '../../hooks/useTransactions'
 
 import * as S from './style'
 
-type TransactionsData = {
-  id: string;
-  title: string;
-  amount: number;
-  type: string;
-  category: string;
-  date: string;
-}
-
 export function TransactionsTable() {
-  const [transactions, setTransactions] = useState<TransactionsData[]>([]);
-
-  useEffect(() => {
-    api.get('transactions')
-      .then(response => setTransactions(response.data.transactions))
-  }, [])
-
-  console.log(transactions);
-
+  const {transactions} = useTransactions()
 
   return (
     <S.Container>
@@ -39,7 +21,7 @@ export function TransactionsTable() {
           {transactions.map(transaction => (
             <tr key={transaction.id}>
               <td>{transaction.title}</td>
-              <td>{new Intl.NumberFormat('pt-BR', {
+              <td className={transaction.type}>{new Intl.NumberFormat('pt-BR', {
                 style: 'currency',
                 currency: 'BRL'
               }).format(transaction.amount)}</td>
